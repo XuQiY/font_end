@@ -1,0 +1,15 @@
+.main{
+  border: 1px solid rgb(180, 169, 191);
+  width:960px;
+  height: 42px;
+  line-height: 42px;
+  text-align: center;
+}
+a{
+  padding: 5px 10px;
+  /* display: inline-block; */
+  background-color: gold;
+  color:black;
+  font-size: 12px;
+  text-decoration: none;
+}
