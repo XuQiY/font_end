@@ -1,0 +1,30 @@
+div{
+  width:200px;
+  height: 200px;
+  line-height: 200PX;
+  background-color:gold;
+  margin: 0 auto;
+  font-size: 25px;
+  text-align: center;
+  transition: all 5s ease;
+  float:left;
+  margin: 10px 30px;
+}
+div:nth-child(1):hover{
+  transform: scale(0.5);
+}
+div:nth-child(2):hover{
+  width: 100px;
+  height: 100px;
+}
+div:nth-child(3){
+
+}
+div:nth-child(3):hover{
+  transform: rotate(50deg);
+}
+
+div:nth-child(4):hover{
+  transform:rotateX(360deg);
+  transform-style: preserve-3d;
+}
