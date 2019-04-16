@@ -1,0 +1,102 @@
+/*
+animation:name duration timing-function delay iteration-count direction;同时设置多个属性
+1、@keyframes 定义关键帧动画
+2、animation-name 动画名称
+3、animation-duration 动画时间
+4、animation-timing-function 动画曲线
+linear 匀速
+ease 开始和结束慢速
+ease-in 开始是慢速
+ease-out 结束时慢速
+ease-in-out 开始和结束时慢速
+steps 动画步数
+5、animation-delay 动画延迟
+6、animation-iteration-count 动画播放次数 n|infinite
+7、animation-direction
+normal 默认动画结束不返回
+Alternate 动画结束后返回
+8、animation-play-state 动画状态
+paused 停止
+running 运动
+9、animation-fill-mode 动画前后的状态
+none 不改变默认行为
+forwards 当动画完成后，保持最后一个属性值（在最后一个关键帧中定义）
+backwards 在 animation-delay 所指定的一段时间内，在动画显示之前，应用开始属性值（在第一个关键帧中定义）
+both 向前和向后填充模式都被应用
+*/
+.box{
+  width: 50px;
+  height: 50px;
+  background-color: #f80;
+  margin: 10px 30px;
+  animation: moving 1s ease 1s infinite Alternate;
+  animation-play-state: paused;
+  float: left;
+}
+@keyframes moving {
+  from{
+    background-color: red;
+  }
+  to{
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    }
+}
+.box:hover{
+  animation-play-state: running;
+}
+
+.walking-people{
+  width: 120px;
+  height: 182px;
+  border: 1px solid #000;
+  overflow: hidden;
+  position: relative;
+}
+.walking-people img{
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: walking 0.5s steps(8) infinite;
+}
+@keyframes walking {
+  from{
+    left: 0px;
+  }
+  to{
+    left: -960px;
+  }
+}
+.jump-animation{
+  width: 100px;
+  height: 100px;
+  margin: 10 30px;
+  float: left;
+  background-color: #f80;
+  animation: jump 5s infinite both;
+}
+@keyframes jump {
+  0%{
+    transform: translateY(0px);
+  }
+  25%{
+      transform: translateY(0px);
+      border-radius: 100%;
+  }
+  50%{
+      transform: translateY(300px);
+      background-color: cyan;
+      border-radius: 50%;
+  }
+  75%{
+      transform: translateY(0px);
+        border-radius: 75%;
+  }
+  100%{
+      transform: translateY(0px);
+      background-color: #f80;
+      border-radius: 0%;
+  }
+
+}
