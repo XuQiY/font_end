@@ -5,6 +5,7 @@
   text-align: center;
   border: 1px solid ;
   line-height: 42px;
+  margin: 0 auto;
 }
 .main a{
   text-decoration:none;
@@ -19,6 +20,7 @@
   width:960px;
   height: 42px;
   text-align: center;
+  margin: 0 auto;
 }
 .main_2 a{
   font-family: Microsoft YaHei;
@@ -33,4 +35,38 @@
 }
 .main_2 a:hover{
   background-color: #00619f;
+}
+
+.main_3{
+  background-color: cyan;
+  display: flex;
+  width: 960px;
+  margin: 0 auto;
+}
+.main_3 ul{
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+.main_3 ul li{
+  flex-grow: 1;
+  text-align:center;
+  border-right: 1px solid #fff;
+}
+.main_3 ul li:nth-child(8){
+  border-right: none;
+}
+.main_3 ul li a{
+  text-decoration: none;
+  color:#666;
+}
+.main_3 ul li a:hover{
+  color:#f80;
+}
+/*设置最大宽度为960PX，小于它的时候将.main_3宽度设置为100%*/
+@media (max-width:960px) {
+  .main_3{
+    width: 100%;
+  }
 }

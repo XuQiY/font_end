@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <style type="text/css">
+      div{
+        background-color:dodgerblue;
+        width:100px;
+        height:200px;
+      }
+      .contant{
+        width:500px;
+        height:500px;
+        background-color:#fff;
+        border:5px solid #333;
+        float:left;
+        position: relative;
+      }
+      .position_center{
+        position:absolute;
+        top:50%;
+        left:50%;
+        margin: -100px 0 0 -50px;
+      }
+      .transform_center{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); */
+
+      }
+      .flex_center{
+        align-items:center;
+        justify-content:center;
+      }
+      }
+    </style>
+    <title></title>
+  </head>
+  <body>
+    <div class="contant" style="position:relative">
+      <div class="position_center"></div>
+    </div>
+    <div class="contant flex_center" style="display:flex">
+      <div></div>
+    </div>
+    <div class="contant">
+      <div class="transform_center"></div>
+    </div>
+  </body>
+</html>

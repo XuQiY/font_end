@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      input{
+        border-radius:20%;
+        outline:none;
+        width: 100px;
+        margin: 10px;
+      }
+      div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      button{
+        height: 35px;
+        flex-grow: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="div1">
+    <input type="number" id="firstNum" value="10" autofocus="true">
+    <select id="operator">
+      <option value="add">+</option>
+      <option value="subtract">-</option>
+      <option value="multiply">*</option>
+      <option value="divide">/</option>
+    </select>
+    <input type="number" id="secondNum" value="">
+    <span>=</span>
+    <input type="text" id="sum" value="">
+    <input type="button" id="cal" value="Calculator">
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>4</button>
+    <button>5</button>
+    <button>6</button>
+    <button>7</button>
+    <button>8</button>
+    <button>9</button>
+  </div>
+  <script type="text/javascript">
+    window.onload=function(){
+    var oSel=document.getElementById("operator");
+    var sum=document.getElementById("sum");
+    var cal=document.getElementById("cal");
+    cal.onclick=function(){
+      var oNum1=parseFloat(document.getElementById("firstNum").value);
+      var oNum2=parseFloat(document.getElementById("secondNum").value);
+      console.log(oNum1,oNum2);
+      switch(oSel.value)
+      {
+        case "add": sum.value=oNum1+oNum2;break;
+        case "subtract":sum.value=oNum1-oNum2;break;
+        case "multiply":sum.value=oNum1*oNum2;break;
+        case "divide":sum.value=oNum1/oNum2;break;
+      }
+    }
+    console.log(oSel[0])
+    console.log(oSel.value);
+  }
+  </script>
+  </body>
+</html>
