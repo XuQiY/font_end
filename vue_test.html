@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vue text</title>
+</head>
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <!-- v-text会覆盖掉原来的内容 -->
+    <p v-text="msg">23456</p> 
+    <!-- v-html会将插入内容当html解析 -->
+    <p v-html="msg2"></p>
+    <!-- v-on:event="handle" 用来绑定事件-->
+    <!-- v-bind用来给属性绑定值，可以简写为':'且绑定的值会被当成js代码解析 -->
+    <input type="button" v-bind:value="msg3" v-on:click="btn1">
+    <!-- v-if="condition"vue为DOM新增结构，表 -->
+    <p v-if="seen">你看见我了</p>
+    <ol>
+      <!-- v-for="(item, index) in items" :key="index" -->
+      <li v-for="(item, index) in items" :key="index">
+        {{item.text}}
+      </li>
+    </ol>
+    <p>{{something}}</p>
+    <input type="text" v-model="something">
+  </div>
+  <script src="js\vue.js"> </script>
+  <script>
+    var mv=new Vue({
+      el:"#app",
+      data:{
+        msg:'123',
+        msg2:'<h3>v-html</h3>',
+        msg3:'v-bind',
+        seen:false,
+        items: [
+        { text: '学习 JavaScript' },
+        { text: '学习 Vue' },
+        { text: '整个牛项目' }
+        ],
+        something:'model双向绑定'
+      },
+      methods: {
+        btn1:function(){
+          alert("事件绑定用v-on,可以简写为@")
+        }
+      },
+    })
+  </script>
+</html>

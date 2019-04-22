@@ -4,67 +4,136 @@
     <meta charset="utf-8">
     <title></title>
     <style>
-      input{
-        border-radius:20%;
-        outline:none;
-        width: 100px;
-        margin: 10px;
-      }
-      div{
+    *{
+      margin: 0;
+      padding: 0;
+    }
+      #div1{
         display: flex;
-        align-items: center;
-        justify-content: center;
         flex-wrap: wrap;
+        width: 400px;
+        margin: 0 auto;
       }
-      button{
-        height: 35px;
-        flex-grow: 1;
+      .view{
+        flex:100%;
+        text-align: center;
+        font-size: 40px;
+        
+      }
+      .btn{
+        flex:24%;
+        font-size: 40px;
+        color:rgb(14, 10, 10);
+        border: 1px solid #999999;
+        text-align: center;
+      }
+      .zero{
+        flex:49%; 
+      }
+      #operater{
+        color:#ebe1e1;
+        background-color: coral;
+      }
+      @media (max-width:400px) {
+      .div1{
+      width: 100%;
+      }
       }
     </style>
   </head>
   <body>
     <div id="div1">
-    <input type="number" id="firstNum" value="10" autofocus="true">
-    <select id="operator">
-      <option value="add">+</option>
-      <option value="subtract">-</option>
-      <option value="multiply">*</option>
-      <option value="divide">/</option>
-    </select>
-    <input type="number" id="secondNum" value="">
-    <span>=</span>
-    <input type="text" id="sum" value="">
-    <input type="button" id="cal" value="Calculator">
-    <button>1</button>
-    <button>2</button>
-    <button>3</button>
-    <button>4</button>
-    <button>5</button>
-    <button>6</button>
-    <button>7</button>
-    <button>8</button>
-    <button>9</button>
+      <div class="view">{{current||0}}</div>
+      <div class="btn" v-on:click="clear">C</div>
+      <div class="btn" @click="sign">-/+</div>
+      <div class="btn" @click="percent">%</div> 
+      <div class="btn" id="operater" @click="divide">/</div>
+      <div class="btn" v-on:click="append('1')">1</div>
+      <div class="btn" v-on:click="append('2')">2</div>
+      <div class="btn" v-on:click="append('3')">3</div>
+      <div class="btn"  id="operater" @click="times">*</div>
+      <div class="btn" v-on:click="append('4')">4</div>
+      <div class="btn" v-on:click="append('5')">5</div>
+      <div class="btn" v-on:click="append('6')">6</div>
+      <div class="btn" id="operater" @click="minus">-</div>
+      <div class="btn" v-on:click="append('7')">7</div>
+      <div class="btn" v-on:click="append('8')">8</div>
+      <div class="btn" v-on:click="append('9')">9</div>
+      <div class="btn" id="operater" @click="add">+</div>
+      <div class="btn zero" v-on:click="append('0')">0</div>
+      <div class="btn" @click="dot">.</div>
+      <div class="btn" @click="equal">=</div>
   </div>
-  <script type="text/javascript">
-    window.onload=function(){
-    var oSel=document.getElementById("operator");
-    var sum=document.getElementById("sum");
-    var cal=document.getElementById("cal");
-    cal.onclick=function(){
-      var oNum1=parseFloat(document.getElementById("firstNum").value);
-      var oNum2=parseFloat(document.getElementById("secondNum").value);
-      console.log(oNum1,oNum2);
-      switch(oSel.value)
-      {
-        case "add": sum.value=oNum1+oNum2;break;
-        case "subtract":sum.value=oNum1-oNum2;break;
-        case "multiply":sum.value=oNum1*oNum2;break;
-        case "divide":sum.value=oNum1/oNum2;break;
-      }
-    }
-    console.log(oSel[0])
-    console.log(oSel.value);
-  }
+  <script src="js\vue.js"> </script>
+  <script>
+    var vm=new Vue({
+      el:"#div1",
+      data: {
+        current:'',
+        operator:null,
+        operatorClicked:false,
+        isEqual:false,
+        previous:null,
+      },
+      methods: {
+        clear:function(){
+          this.current='';
+        },
+        sign:function(){
+          this.current=String(this.current);
+          // console.log(this.current);
+          this.current=this.current.charAt(0)==='-'?this.current.slice(1):-this.current;
+        },
+        percent:function(){
+          this.current=parseFloat(this.current)/100;
+        },
+        append:function(number){
+          if(this.operatorClicked){
+            this.current="";
+            this.operatorClicked=false;
+          }
+          this.current=this.current+number;
+        },
+        dot:function(){
+          if(this.current.indexOf('.')===-1){
+            this.append('.');
+          }
+        },
+        // 判断运算符是否被点下去
+        setPrevious:function(){
+          this.previous=this.current;
+          this.operatorClicked=true;
+        },
+        // 除法，通过给operator绑定方法来执行运算符操作
+        divide:function(){
+          this.operator=(a,b)=>a/b;
+          this.setPrevious();
+        },
+        // 乘法
+        times:function(){
+          this.operator=(a,b)=>a*b;
+          this.setPrevious();
+        },
+        // 加法
+        add:function(){
+          this.operator=(a,b)=>a+b;
+          this.setPrevious();
+        },
+        // 减法
+        minus:function(){
+          this.operator=(a,b)=>a-b;
+          this.setPrevious();
+        },
+        // 等号按下执行运算
+        equal:function(){
+          // console.log(this.current,this.previous) 调试用;
+          this.current=this.operator(parseFloat(this.previous),parseFloat(this.current))
+          // console.log(typeof(this.current));
+          this.previous=null;
+        }
+        
+      },
+    })
   </script>
   </body>
 </html>
