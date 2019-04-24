@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .thin{
+      font-weight: 200;
+    }
+    .red{
+      color:red;
+    }
+    .italic{
+      font-style: italic
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- <h1 v-bind:class="['red','thin']">通过v-bind可以直接用数组给样式</h1> -->
+    <h1 v-bind:class="vueObj">通过v-bind可以直接运用对象给样式</h1>
+    <h1 v-bind:class="['red','thin',tag?'italic':'']">数组内可调用三元运算符</h1>
+    <h1 :style="{'color':'red' ,'font-style':'italic'}">v-bind给内联样式赋值</h1>
+  </div>
+  <p></p>
+
+  <script src="js\vue.js"> </script>
+  <script>
+    var myvue=new Vue({
+      el:'#app',
+      data:{
+          vueObj:['red','thin'] ,
+          tag:true
+      },
+    })
+  </script>
+</body>
+</html>
