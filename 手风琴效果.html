@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js\jquery-1.12.4.min.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $('.contant li').click(function() {
+        console.log(($(this).index())); //输出当前项的索引值
+        let pos=parseInt($(this).css('left'));  //获取当前left的值并转换为Int
+        if(pos<250)      //小于250向右滑
+        {
+          $(this).animate({left:750+$(this).index()*50});
+          $(this).nextAll().each(function () {         
+            console.log($(this));
+            $(this).animate({left:750+$(this).index()*50});
+          });
+        }
+        if(pos>250)     //大于250向左滑
+        {
+          $(this).animate({left:($(this).index()*50)});        
+          $(this).prevAll().each(function () {   //如果点击的不是最前面的对象，就把前面的都移动到左边
+          console.log($(this));
+          $(this).animate({left:$(this).index()*50});    
+          });
+        }
+      })
+
+      
+    })
+  
+  </script>
+  <style>
+    .main{
+      width: 1000px;
+      margin: 0 auto;
+      height: 500px;
+    }
+    .contant{
+      overflow: hidden;
+      position: relative;
+      height: 500px;
+      background:url(sources/photo-1522143804971-93c748148fbd.jpg);
+      background-size: 800px 500px;
+      background-repeat: no-repeat;
+    }
+    .contant li{
+      border:1px solid #fff;
+      list-style: none;
+      text-align: center;
+      float: left;
+      height: 500px;
+      position: absolute;
+    }
+     .contant li:nth-child(1){
+      left: 0px;
+     }
+    .contant li:nth-child(2){
+      left: 800px;
+    }
+    .contant li:nth-child(3){
+    left: 850px;
+    }
+    .contant li:nth-child(4){
+    left: 900px;
+    }
+    .contant li:nth-child(5){
+    left: 950px;
+    }
+    .contant li span{
+      height: 100px;
+      float: left;
+      background: linear-gradient(to right,white,lightgreen);
+      width: 30px;
+      padding: 200px 10px 200px 10px;
+    }
+    .contant li img{
+      float: left;
+      width:93%; 
+      height: 500px;
+      overflow: hidden;
+    }
+  </style>
+  <title>手风琴 </title>
+</head>
+<body>
+  <div class='main'>
+    <ul class='contant'>
+      <li><span>切换图片</span><img src="sources\post-bg-2015.jpg" alt="1"></li>
+      <li><span>切换图片</span><img src="sources\post-bg-2018-11-20.jpg" alt="2"></li>
+      <li><span>切换图片</span><img src="sources\post-bg-universe.jpg" alt="3"></li>
+      <li><span>切换图片</span><img src="sources\v2-5deaa1fefd428bc4d4d60d61615988cc_r.jpg" alt="4"></li>
+      <li><span>切换图片</span><img src="sources\p1.jpg" alt="5"></li>
+    </ul>
+  </div>
+</body>
+</html>
