@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js\jquery-1.12.4.min.js"></script>
+  <script>
+    $(function () {
+      //普通的绑定方法只会绑定到现有的元素上，新增的不会绑定.
+      // $('.rm').click(function() {
+      //   console.log($(this).parent()); 
+      //   $(this).parent().remove();      
+      // })
+      let $list=$('.list');
+      //通过委托绑定的事件，新加的子元素也会自动绑定
+      $list.delegate('li .pre','click',function() {
+        if($(this).parent().prev('li')[0])     //如果前面prev()[0]还有值就提前节点
+        {
+          console.log($(this).parent().prev('li')[0]);     //下标[0]返回的是前面节点Li的值
+          $(this).parent().prev('li').before('<li>'+$(this).parent().html()+'</li>'); //在元素前添加节点
+          $(this).parent().remove();  //再删除原来节点
+        }
+      });
+      $list.delegate('li .rm','click',function() {
+        $(this).parent().remove();
+        console.log($(this));
+      });
+      $('.addTodoBtn').click(()=>{
+        let addText=$('#addTodo').val();
+        let $li=$('<li><span>'+addText+'</span><a href="#" class="rm">删除</a><a href="#" class="pre">提前</a></li>');
+        console.log($li);
+        $('.list').append($li);
+      })
+
+    })
+    
+  </script>
+  <style>
+    .main{
+      width: 500px;
+      height: 500px;
+      margin: 0 auto;
+      border: 1px solid lightslategrey;
+    }
+    .list{
+      width: 300px;
+      margin: 0 auto;
+      margin-top: 20px;
+      height: 200px;
+      list-style:decimal;
+    }
+    .list li{
+      margin-top:15px; 
+      border-bottom: 1px solid greenyellow;
+    }
+    .list a{
+      margin-left:10px;
+    }
+    #addTodo{
+      width: 150px;
+      margin:20px 0 0 100px;
+      height: 25px;
+    }
+    .addTodoBtn{
+      width: 40px;
+      height: 30px;
+      border-radius: 25%;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <div>
+      <input type="text" name="add" id="addTodo">
+      <input type="button" value="添加" class="addTodoBtn">
+    </div>
+    <ul class="list">
+      <li>
+        <span>homework</span>
+        <a href="#" class="rm">删除</a>
+        <a href="#" class="pre">提前</a>
+      </li>
+      <li>
+        <span>javascript</span>
+        <a href="#" class="rm">删除</a>
+        <a href="#" class="pre">提前</a>
+      </li>
+      <li>
+        <span>english</span>
+        <a href="#" class="rm">删除</a>
+        <a href="#" class="pre">提前</a>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>
