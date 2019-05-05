@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js\jquery-1.12.4.min.js"></script>
+  <title>无缝滚动</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    .slide{
+      width: 500px;
+      height: 50px;
+      background: lightskyblue;
+      position: relative;
+      margin: 0 auto;
+      overflow: hidden;
+
+    }
+    .slide ul{
+      list-style: none;
+      position: absolute;
+      width: 1000px;
+      left:0px;
+    }
+    .slide li{
+      float: left;
+      width: 50px;
+      height: 50px;
+      background-color: blueviolet;
+      margin-left: 50px;
+      line-height: 50px;
+      text-align: center;
+    }
+  </style>
+  <script>
+    $(function () {
+      let $ul=$('.slide ul');
+      let left=0;
+      setInterval(() => {
+        left--;
+        $ul.css({left:left});
+        if(left===-500) //再left===500的时候瞬间拉回来
+        {
+          left=0;
+        }
+      }, 30);
+      
+    })
+  </script>
+</head>
+<body>
+  <div class="slide">
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+    </ul>
+  </div>
+</body>
+</html>

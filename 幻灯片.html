@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js\jquery-1.12.4.min.js"></script>
+  <script>  
+    $(function () {
+      let sliderCount=1;
+      let sliderLen=$('.slider li').length;
+      setInterval(() => {
+        $('.slider li').eq(sliderCount).fadeIn().siblings().fadeOut();
+        console.log($('.slider li').eq(1));
+        console.log(sliderCount);
+        sliderCount++;
+        if(sliderCount>=sliderLen){
+          sliderCount=0;
+        }
+      }, 3000);
+      // $('.slider li').click(function () {
+      //   alert($(this).index());
+      // })
+      $('')
+    })
+  </script>
+  <title>幻灯片</title>
+  <style>
+    .main{
+      width:500px;
+      height: 300px;
+      margin: 0 auto;
+      overflow: hidden;
+      position: relative;
+    }
+    .slider{
+      width: 500px;
+      height: 300px;
+      list-style: none;
+    }
+    .slider li{
+      display: inline;
+      position: absolute;
+      left: 0;
+      display: none;
+    }
+    .slider li:nth-child(1){
+      display: block;
+    } 
+    .slider img{
+      width: 500px;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <ul class="slider">
+      <li><img src="sources\photo-1518145312389-36e7f6e06034.jpg" alt=""><a href=""></a></li>
+      <li><img src="sources\photo-1522143804971-93c748148fbd.jpg" alt=""><a href=""></a></li>
+      <li><img src="sources\post-bg-alibaba.jpg" alt=""><a href=""></a></li>
+      <li><img src="sources\post-bg-universe.jpg" alt=""><a href=""></a></li>
+      <li><img src="sources\v2-5deaa1fefd428bc4d4d60d61615988cc_r.jpg" alt=""><a href=""></a></li>
+    </ul>
+  </div>
+</body>
+</html>
