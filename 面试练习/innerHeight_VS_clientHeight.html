@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+
+
+</head>
+<body style="height:3000px;padding: 0px;margin:0px;">
+  
+    <div id="d"></div>
+    <script>
+      window.onload= function () {
+        //let windowHeight=window.innerHeight;
+        setInterval(function () {
+          var inner_w = window.innerWidth;
+          var inner_h = window.innerHeight;
+          var client_w = document.documentElement.clientWidth;
+          var client_h = document.documentElement.clientHeight;
+          var debug_msg = "inner: " + inner_w + "-" + inner_h + "<br>client: " + client_w + "-" + client_h;
+          document.getElementById("d").innerHTML = debug_msg;
+          document.title = debug_msg;
+          document.body.style.background = (client_w === inner_w && client_h === inner_h ? "green" : "red");
+        }, 60);
+      }
+    </script>
+</body>
+</html>
