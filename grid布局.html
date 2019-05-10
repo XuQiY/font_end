@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=\, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style type="text/css">
+/*
+  (1)repeat()
+repeat()接受两个参数，第一个参数是重复的次数（上例是3），第二个参数是所要重复的值。
+
+repeat()重复某种模式也是可以的。
+（2）auto-fill 关键字
+
+有时，单元格的大小是固定的，但是容器的大小不确定。如果希望每一行（或每一列）容纳尽可能多的单元格，这时可以使用auto-fill关键字表示自动填充。
+ 
+（3）fr 关键字
+
+为了方便表示比例关系，网格布局提供了fr关键字（fraction 的缩写，意为"片段"）。如果两列的宽度分别为1fr和2fr，就表示后者是前者的两倍。
+
+（4）minmax()
+
+minmax()函数产生一个长度范围，表示长度就在这个范围之中。它接受两个参数，分别为最小值和最大值。
+
+5）auto 关键字
+
+auto关键字表示由浏览器自己决定长度。
+
+6）网格线的名称
+
+grid-template-columns属性和grid-template-rows属性里面，还可以使用方括号，指定每一根网格线的名字，方便以后的引用
+
+（7）布局实例
+
+grid-template-columns属性对于网页布局非常有用。两栏式布局只需要一行代码。
+
+justify-content属性是整个内容区域在容器里面的水平位置（左中右），align-content属性是整个内容区域的垂直位置（上中下）。
+justify-items属性设置单元格内容的水平位置（左中右），align-items属性设置单元格内容的垂直位置（上中下）。
+
+*/
+  .main{
+    /* display: grid; */
+    display: inline-grid; /*将元素设置为行内元素*/
+    grid-template-columns: 50px 50px 50px;
+    grid-template-rows: 50px 50px 50px;
+  }
+    .main div{
+      background: lightseagreen;
+      border: 1px solid #fff;
+      text-align: center;
+    }
+    .bar,.foo{
+      font: bold 30px 'Micsoft Yahei';
+    }
+
+    .rep{
+      display: grid;
+      grid-template-columns: repeat(3,50px);
+      /* grid-template-columns: repeat(auto-fill,100px);  */
+      grid-template-rows: repeat(3,50px);
+    }
+    .rep div{
+      background: yellowgreen;
+      border: 1px solid #fff;
+      
+    }
+    .rep div:nth-child(1){
+      grid-column-start: 1;
+      grid-column-end: 3;
+      grid-row-start: 2;
+      grid-row-end: 4;
+    }
+     .rep div:nth-child(3){
+     grid-column-start:span 2;
+     }
+    .auto-fill{
+      display: grid;
+      grid-template-columns: repeat(auto-fill,100px);
+    }
+    .auto-fill div{
+       background: blueviolet;
+       border: 1px solid #fff;
+    }
+    .fr{
+      display: grid;
+      grid-template-columns: 1fr 2fr 3fr;
+      grid-template-rows: repeat(3,50px);
+      gap: 10px 5px;
+
+    }
+    .fr div{
+    background: rgb(226, 43, 144);
+    border: 1px solid #fff;
+    }
+    
+  </style>
+  <title>Document</title>
+</head>
+<body>
+  <span class="bar">grid</span>
+  <div class="main">
+    <div>
+      <p>1</p>
+    </div>
+    <div>
+      <p>2</p>
+    </div>
+    <div>
+      <p>3</p>
+    </div>
+    <div>
+      <p>4</p>
+    </div>
+    <div>
+      <p>5</p>
+    </div>
+    <div>
+      <p>6</p>
+    </div>
+    <div>
+      <p>7</p>
+    </div>
+    <div>
+      <p>8</p>
+    </div>
+    <div>
+      <p>9</p>
+    </div>
+  </div>
+  <br>
+  <span class="bar">repeat</span>
+  <div class="rep">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <div>8</div>
+    <div>9</div>
+  </div>
+  <span class="bar">auto-fill</span>
+  <div class="auto-fill">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <div>8</div>
+    <div>9</div>
+  </div>
+    <span class="bar">fr</span>
+    <div class="fr">
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+      <div>4</div>
+      <div>5</div>
+      <div>6</div>
+      <div>7</div>
+      <div>8</div>
+      <div>9</div>
+    </div>
+</body>
+</html>

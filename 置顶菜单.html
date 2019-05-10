@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js\jquery-1.12.4.min.js"></script>
+  <script>
+    $(function () {
+      $(window).scroll(function scrollTop() {
+        let toTop=$(document).scrollTop(); //scrollTop()返回的是距离顶部的距离
+        console.log(toTop);
+        if(toTop>150)
+        {
+          $('.top-nav').css({position:'fixed',top:'0px',marginLeft:'50px'});
+          $('.top-btn').fadeIn();
+        }
+        else
+        {
+          $('.top-nav').css({position:'static',marginLeft:'50px'});
+          $('.top-btn').fadeOut();
+        }
+      })
+      $('.top-btn').click(function () {
+        $('html,body').animate({'scrollTop':0});  //窗口滚动到顶部
+        
+      })
+    })
+  </script>
+  <title>top-nav</title>
+  <style>
+    .main{
+      width: 500px;
+      height: 3000px;
+      background-color: lightblue;
+      margin: 0 auto;
+      position: relative;
+    }
+    .head{
+      width: 500px;
+      height: 150px;
+      background: lightgreen;
+    }
+    .top-nav{
+      width: 400px;
+      height: 50px;
+      text-align: center;
+      margin: 0 auto;
+      background: cyan;
+    }
+    .top-btn{
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: none;
+      background: coral;
+      float: right;
+      position:fixed;
+      top: 300px;
+      margin-left: 450px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <header class="head"></header>
+    <nav class="top-nav">置顶菜单</nav>
+    <aside style="width:200px;height:100px;background:chartreuse"></aside>
+    <input type="button" value="top" class="top-btn">
+  </div>
+</body>
+</html>
