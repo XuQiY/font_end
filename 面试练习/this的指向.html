@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>this</title>
+</head>
+<body>
+  <script>
+    window.onload=function(){
+      console.log(this); //默认是window对象
+
+      function Func() {
+        console.log(this);
+      }
+
+      //构造函数的this在对象创建时指向对象本身
+      let constructor1=new Func();
+
+      function method(a,b) {
+        console.log(this.name);
+        console.log(a+"+"+b);
+      }
+
+      let name="张三";
+      method(1,2);
+
+      //通过apply更改this指向，传入的参数为数组
+      method.apply({name:"funapply"},[1,2]);
+      //通过call更改this指向，传入的参数为数值
+      method.call({name:"funcall"},...[1,2]);
+      
+      let test=method.bind({name:"李四"},3,4);
+      test();
+
+      
+
+    }
+  </script>
+</body>
+</html>

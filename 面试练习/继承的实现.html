@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div class="demo"></div>  
+<script>
+  window.onload=function(){
+    function Person(name) 
+    {
+      this.name=name;
+      this.say=function() 
+      {
+        console.log(this.name);
+      }
+    }
+
+    console.log("通过构造函数创建方法:")
+    let per1=new Person("jack");
+    per1.say();
+
+    let per2=new Person("john")
+    per2.say();
+
+    //返回false，说明两者的say（）方法本质不同
+    console.log(per1.say===per2.say);
+    
+    console.log("通过原型对象添加方法:")
+    //通过原型对象为对象添加方法
+    Person.prototype.do=function(){console.log(this.name)};
+
+    //返回  ture，说明原型对象添加的方法是相同的
+    console.log(per1.do===per2.do);
+    per1.do();
+    per2.do();
+
+    console.log("继承的实现");
+    console.log("方法一：原型对象实现继承");
+    Person.prototype.extends1=function(){console.log(this.name);}
+    let p1=new Person("extends1");
+    p1.extends1(); 
+
+
+    console.log("方法二:替换原型对象实现继承：");
+    Person.prototype={newSay:function(){console.log("new  extends2")}};
+    let p2=new Person("extends2");
+    p2.newSay();
+
+    console.log("方法三：利用object.create()实现继承");
+    let obj={
+      objSay:function()
+      {
+        console.log("object say")
+      }
+    }
+
+    let p3=Object.create(obj);
+    p3.objSay();
+
+    console.log("方法四：混入继承");
+    let o1={};
+    let o2={name:'jim'};
+    o1.name=o2.name;       //o1继承o2属性
+    console.log(o1.name);
+
+
+  }
+</script>
+</body>
+
+
+</html>
