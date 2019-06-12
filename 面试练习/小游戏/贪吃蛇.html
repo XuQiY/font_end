@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  <style>
+    .map {
+      width: 800px;
+      height: 600px;
+      background-color: #CCC;
+      position: relative;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="map"></div>
+  <script src="common.js"></script>
+  <script>
+    //产生随机数对象的
+    (function (window) {
+      function Random() {}
+      Random.prototype.getRandom = function (min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
+      };
+      //把局部对象暴露给window顶级对象,就成了全局的对象
+      window.Random = new Random();
+    })(window); //自调用构造函数的方式,分号一定要加上
+
+
+    //产生小方块对象
+    (function (window) {
+      //console.log(Random.getRandom(0,5));
+      //选择器的方式来获取元素对象
+      var map = document.querySelector(".map");
+      var elements=[];
+      //食物的构造函数 
+      function Food(width, height, color) {
+        this.width = width || 20; //默认的小方块的宽
+        this.height = height || 20; //默认的小方块的高
+        //横坐标,纵坐标
+        this.x = 0; //横坐标随机产生的
+        this.y = 0; //纵坐标随机产生的
+        this.color = color; //小方块的背景颜色
+        this.element = document.createElement("div"); //小方块的元素
+      }
+      //初始化小方块的显示的效果及位置---显示地图上
+      Food.prototype.init = function (map) {
+        //设置小方块的样式
+        remove();
+        var div = this.element;
+        elements.push(div);
+        div.style.position = "absolute"; //脱离文档流
+        div.style.width = this.width + "px";
+        div.style.height = this.height + "px";
+        div.style.backgroundColor = this.color;
+        //把小方块加到map地图中
+        map.appendChild(div);
+        this.render(map);
+
+        function remove() {
+          for(var i=0;i<elements.length;i++)
+          {
+            var elm=elements[i];
+            elm.parentNode.removeChild(elm);
+            elements.splice(i,1);
+          }
+        }
+      };
+      //产生随机位置
+      Food.prototype.render = function (map) {
+        //随机产生横纵坐标
+        var x = Random.getRandom(0, map.offsetWidth / this.width) * this.width;
+        var y = Random.getRandom(0, map.offsetHeight / this.height) * this.height;
+        this.x = x;
+        this.y = y;
+        var div = this.element;
+        div.style.left = this.x + "px";
+        div.style.top = this.y + "px";
+      };
+
+      window.Food=Food;
+      window.map=map;
+    })(window);
+
+
+    (function (){
+      var elements=[];
+      //把小蛇抽象成一个个小方块组成
+      function Snake(width,height,dir) {
+        this.width=width||20;
+        this.height=height||20;
+
+        //用数组存贮小蛇的身体
+        this.body=[
+          {x:3,y:2,color:"red"},
+          {x:2,y:2,color:"orange"},
+          {x:1,y:2,color:"orange"}
+        ];
+        this.dir=dir||"right";
+      };
+      //小蛇实例化
+      Snake.prototype.init=function(map){
+        //删除之前的蛇
+        remove();
+        for(var i=0;i<this.body.length;i++)
+        {
+          var obj=this.body[i];
+          var div=document.createElement("div");
+          map.appendChild(div);
+          div.style.position="absolute";
+          div.style.width=this.width+"px";
+          div.style.height=this.height+"px";
+          div.style.top=obj.y*this.width+"px";
+          div.style.left=obj.x*this.height+"px";
+          div.style.backgroundColor=obj.color;
+
+          elements.push(div);
+        }
+        function remove(){
+          var i=elements.length-1;
+          for(;i>=0;i--)
+          {
+            var ele=elements[i];
+            ele.parentNode.removeChild(ele);
+            elements.splice(i,1);
+          }
+        }
+
+      }
+      
+      //小蛇移动
+      Snake.prototype.move=function(food,map){
+        var i=this.body.length-1;
+        for(;i>0;i--){
+          this.body[i].x=this.body[i-1].x;
+          this.body[i].y=this.body[i-1].y;
+        }
+        switch(this.dir){
+          case "right":this.body[0].x+=1;break;
+          case "left":this.body[0].x-=1;break;
+          case "top":this.body[0].y-=1;break;
+          case "bottom":this.body[0].y+=1;break;
+        }
+      }
+      window.Snake=Snake;
+    }());
+
+    (function(){
+      function Game(){
+        this.food=new Food();
+        this.map=map;
+        this.snake=new Snake();
+      };
+      Game.prototype.init=function(){
+        this.food.init(this.map);
+        this.snake.init(this.map);
+        this.snake.move(this.food,this.map);
+        setInterval(() => {
+          this.snake.init(this.map);
+          this.snake.move(this.food,this.map);}, 150);
+      };
+      window.Game=Game;
+    }());
+
+
+    //外部测试
+    // var fd = new Food(20, 20, "green");
+    // fd.init(map);
+    // var snake=new Snake();
+    // // console.log(fd.x + "====" + fd.
+    // setInterval(() => {
+    //   snake.init(map);
+    //   snake.move(fd,map);
+    // }, 150);
+    var game=new Game();
+    game.init();
+  </script>
+</body>
+
+</html>

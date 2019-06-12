@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>闭包</title>
+</head>
+<body>
+  <script>
+    let scope="global scope";
+    function check() {
+      let scope="local scope";
+      console.log(scope);
+    }
+    check(); //local scope
+    console.log(scope);
+    
+    console.clear();
+
+    let countNum=(function count(){
+      let num=0;
+      function f() {
+        return ++num;
+      }
+      return f;
+    }()); //相当于立即调用count()，返回的是f;
+    console.log(countNum());
+    console.log(countNum());
+    console.log(countNum());
+    //console.dir(countNum);
+
+    //不同实例对象的闭包函数返回值不同，并不会共享
+    // function counter() {
+    //   let num=0;
+    //   function count() {
+    //     console.log("num=%d",num);
+    //     return num++;
+    //   }
+    //   function reduce(){
+    //     return num--;
+    //   }
+    //   return {count,reduce};
+    // }
+
+    // let c1=counter();
+    // let c2=counter();
+
+    // c1.count();  //num=0
+    // c2.count();  //num=0
+    // c1.count();  //num=1
+    // c2.redunce();  //num=1 两者并不冲突,保存在不同的内存中
+
+    let c1=(function () {
+      let num=0;
+      return function () {
+        console.log(num);
+        return num++;
+      }
+    }());
+    
+    c1();
+    let c2=c1;
+    c1(); //1
+    c2(); //2说明C2和C1共享了num
+    console.clear();
+    let arr1=[1,2,3,4,5,6,7,8,9];
+    function foo(params) {
+      console.log(params);
+      return params*10;
+    }
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>

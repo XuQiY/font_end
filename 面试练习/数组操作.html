@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let arr=["apple","banana","peach"];
+    console.log(typeof(arr));
+    console.log(arr[0]);
+    console.log(arr);
+    console.log(arr.__proto__);
+    let arr1=new Array();
+    //unshift从头部插入
+    arr1.unshift(1);
+    //push从尾部插入
+    arr1.push(2);
+    console.log(arr1);
+    //shift删除头部第一个
+    arr.shift();
+    console.log(arr);
+    //pop从尾部删除
+    arr.pop();
+    console.log(arr);
+    arr.push('bear');
+
+    //运用扩展运算符...将数组arr添加到arr中
+    arr1.push(...arr);
+    console.log(arr1);
+
+    //通过*=转换字符串为数字
+    //Array.from()将带有遍历器的对象转换为数组，第二个参数接收map方法,
+    //第三个参数绑定this
+    let arr2String=Array.from(arr1,(value)=>value*=1);
+    //运用数组运算符求最大值
+    arr3=[1,2,3,NaN]
+    console.log(arr2String);
+    console.log( Math.max(...arr3));
+    console.log(NaN>1);
+  </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //String对象
+    let str="stringstring";
+    //length长度
+    let len=str.length;
+    console.log(len);
+
+    //charAt(index)指定位置索引
+    console.log(str.charAt(0));
+
+    //indexOf()返回查找字符串首次出现的索引
+    console.log(str.indexOf('s'));
+
+    //lastindexOf()返回查找字符串最后出现的索引
+    console.log(str.lastIndexOf('s'));
+
+    //substring(start,end) 截取开始位置到结束位置的字符串
+    console.log(str.substring(0,6));
+
+    //substr(start,[,length])截取从开始位置到指定长度的子字符串 
+    console.log(str.substr(3,5));
+
+    //大写
+    console.log(str.toUpperCase());
+
+    //split([spearator[,limit])将字符分割成数组，Limit用于限制数量
+    console.log(str.split(''));
+
+    //replacae(str2,str1)使用str2替换字符串中的str1，返回替换结果
+    console.log(str.replace('tring','ubmit'));
+
+    console.log('***********************************************************');
+    //Number
+    let num=123.45
+    //toFixed(n)，四舍五入,保留n位小数
+    console.log(num.toFixed());
+    console.log(num.toFixed(1));
+    console.log(Number.MAX_VALUE);
+    console.log(Number.MIN_VALUE);
+    console.log(num.toLocaleString());
+    console.log(num.toString());
+
+
+
+  </script>
+</body>
+</html>
