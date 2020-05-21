@@ -103,6 +103,7 @@ function getExportOptions(e) {
  
 // 转化为JSON格式
 function makeJSON_(object, options) {
+// 处理数组和对象
   var obj, o;
   for (var i = 0; i < object.length; i++) {
     obj = object[i];
